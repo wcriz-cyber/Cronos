@@ -1,0 +1,10 @@
+{
+  "name": "Cronos Trading Bot",
+  "description": "Sistema avanzado de trading automatizado con PWA real y conexión Gate.io optimizada.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}

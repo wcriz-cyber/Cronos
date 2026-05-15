@@ -1,0 +1,6 @@
+{
+  "firestore": {
+    "database": "ai-studio-cronostrading-1fd638cb-c327-4de0-8ab3-a85d1b2f1127",
+    "rules": "firestore.rules"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User profile containing Gate.io API keys and roles.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "gateIoApiKey": { "type": "string" },
+        "gateIoApiSecret": { "type": "string" },
+        "telegramChatId": { "type": "string" },
+        "pin": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "createdAt": { "type": "number", "description": "Timestamp" }
+      },
+      "required": ["email", "role", "createdAt"]
+    },
+    "DcaStrategy": {
+      "title": "DCA Strategy",
+      "description": "Stored DCA strategy for an automated system.",
+      "type": "object",
+      "properties": {
+        "dropsPercent": { "type": "array" },
+        "amounts": { "type": "array" },
+        "totalInvested": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["dropsPercent", "amounts", "totalInvested", "updatedAt"]
+    },
+    "Slot": {
+      "title": "Trading Slot",
+      "description": "Active trading slots per user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "pair": { "type": "string" },
+        "basePrice": { "type": "number" },
+        "invested": { "type": "number" },
+        "isDuplicated": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["active", "sold"] },
+        "levels": { "type": "array" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["userId", "pair", "basePrice", "status", "levels", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Store user profiles, gated keys and admin status."
+    },
+    "/global_settings/{settingId}": {
+      "schema": { "$ref": "#/entities/DcaStrategy" },
+      "description": "Global settings like default DCA strategies (manageable by admin)."
+    },
+    "/users/{userId}/slots/{slotId}": {
+      "schema": { "$ref": "#/entities/Slot" },
+      "description": "Active trading positions for the user."
+    }
+  }
+}
